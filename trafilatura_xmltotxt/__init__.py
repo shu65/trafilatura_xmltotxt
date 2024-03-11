@@ -1,0 +1,1 @@
+from trafilatura_xmltotxt._xmltotxt import xmltotxt
