@@ -91,7 +91,7 @@ def tabelrowtotxt(row_xml, include_formatting):
   new_raw_text = ''.join(new_raw_block)
   return new_text, new_raw_text, last_element, n_cell
 
-def tabletotxt(table_xml, include_formatting):
+def tabletotxt(table_xml, include_formatting, table_formatting):
   n_cells_first_row = None
   valid_table = True
   last_element = None
@@ -114,12 +114,12 @@ def tabletotxt(table_xml, include_formatting):
         raw_text_block.append("\n")
 
   ret = ''.join(raw_text_block)
-  if valid_table and include_formatting:
+  if valid_table and include_formatting and table_formatting:
     ret = ''.join(table_block)
   return ret, last_element
 
 
-def xmltotxt(xmloutput, include_formatting):
+def xmltotxt(xmloutput, include_formatting, table_formatting=False):
     '''Convert to plain text format and optionally preserve formatting as markdown.'''
     return_blocks = []
     new_block = []
@@ -144,7 +144,7 @@ def xmltotxt(xmloutput, include_formatting):
               if len(new_block) > 0:
                 new_text = sanitize(''.join(new_block))
                 return_blocks.append(new_text + '\n')
-              table_block, last_table_element = tabletotxt(element, include_formatting=include_formatting)
+              table_block, last_table_element = tabletotxt(element, include_formatting=include_formatting, table_formatting=table_formatting)
               return_blocks.append(''.join(table_block) + '\n')
               new_block = []
             elif element.tag in ('graphic', 'row', 'table'):
