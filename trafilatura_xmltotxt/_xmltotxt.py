@@ -25,7 +25,7 @@ def replace_element_text(element, include_formatting):
                 element.text = f'{HI_FORMATTING[rend]}{element.text}{HI_FORMATTING[rend]}'
         elif element.tag == 'code':
             if '\n' in element.text:
-                element.text = f'```\n{element.text}\n```'
+                element.text = f'```\n{element.text}\n```\n'
             else:
                 element.text = f'`{element.text}`'
     # handle links
@@ -143,6 +143,9 @@ def xmltotxt(xmloutput, include_formatting, table_formatting=False):
             elif element.tag == 'table':
               if len(new_block) > 0:
                 new_text = sanitize(''.join(new_block))
+                #print("-"*100)
+                #print("new_block", ''.join(new_block))
+                #print("new_text", new_text)
                 return_blocks.append(new_text + '\n')
               table_block, last_table_element = tabletotxt(element, include_formatting=include_formatting, table_formatting=table_formatting)
               return_blocks.append(''.join(table_block) + '\n')
@@ -153,12 +156,17 @@ def xmltotxt(xmloutput, include_formatting, table_formatting=False):
         else:
           # process text
           textelement = replace_element_text(element, include_formatting)
+          #print("textelement", textelement)
           if element.tag == "code":
-            if '\n' in textelement:
+            if '\n' in element.text:
               if len(new_block) > 0:
                 new_text = sanitize(''.join(new_block))
+                #print("-"*100)
+                #print("new_block", ''.join(new_block))
+                #print("new_text", new_text)
                 return_blocks.append(new_text + '\n')
               new_text = sanitize(textelement, preserve_space=True)
+              #print("multi code", new_text)
               return_blocks.append(new_text + '\n')
               new_block = []
             else:
@@ -173,6 +181,9 @@ def xmltotxt(xmloutput, include_formatting, table_formatting=False):
               new_block.extend([textelement, ' '])
     if len(new_block) > 0:
       new_text = sanitize(''.join(new_block))
+      #print("-"*100)
+      #print("new_block", ''.join(new_block))
+      #print("new_text", new_text)
       return_blocks.append(new_text)
     ret = unescape(''.join(return_blocks))
     ret = normalize_unicode(ret)
