@@ -8,7 +8,7 @@ LOGGER = logging.getLogger(__name__)
 
 NEWLINE_ELEMS = {
     'item': '\n- ',
-    **{tag: '\n' for tag in ['code', 'graphic', 'head', 'lb', 'list', 'p', 'quote', 'row', 'table']}
+    **{tag: '\n' for tag in ['code', 'graphic', 'head', 'lb', 'list', 'p', 'quote', 'cell', 'row', 'table']}
 }
 
 def replace_element_text(element, include_formatting):
