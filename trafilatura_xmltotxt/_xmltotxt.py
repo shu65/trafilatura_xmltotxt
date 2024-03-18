@@ -1,10 +1,15 @@
 from trafilatura.utils import normalize_unicode
-from trafilatura.xml import replace_element_text, NEWLINE_ELEMS, HI_FORMATTING, SPECIAL_FORMATTING, sanitize
+from trafilatura.xml import replace_element_text, HI_FORMATTING, SPECIAL_FORMATTING, sanitize
 from html import unescape
 import copy
 import logging
 
 LOGGER = logging.getLogger(__name__)
+
+NEWLINE_ELEMS = {
+    'item': '\n- ',
+    **{tag: '\n' for tag in ['code', 'graphic', 'head', 'lb', 'list', 'p', 'quote', 'row', 'table']}
+}
 
 def replace_element_text(element, include_formatting):
     '''Determine element text based on text and tail'''
