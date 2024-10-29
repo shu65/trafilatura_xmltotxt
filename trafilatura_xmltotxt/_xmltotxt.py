@@ -163,7 +163,7 @@ def xmltotxt(xmloutput, include_formatting, table_formatting=False):
           textelement = replace_element_text(element, include_formatting)
           #print("textelement", textelement)
           if element.tag == "code":
-            if '\n' in element.text:
+            if element.text is not None and '\n' in element.text:
               if len(new_block) > 0:
                 new_text = sanitize(''.join(new_block))
                 #print("-"*100)
