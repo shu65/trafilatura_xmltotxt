@@ -2,7 +2,7 @@ from distutils.core import setup
 from setuptools import find_packages
 
 install_requires = [
-    "trafilatura==1.7.0",
+    "trafilatura>=1.7.0,<1.13",
 ]
 
 
