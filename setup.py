@@ -8,7 +8,7 @@ install_requires = [
 
 setup(
     name='trafilatura_xmltotxt',
-    version='0.0.0',
+    version='0.0.1',
     description='xml to txt for trafilatura',
     author='Shuji Suzuki',
     author_email='dolphinripple@gmail.com',
